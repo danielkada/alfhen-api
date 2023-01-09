@@ -1,0 +1,12 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "Alfhen application API",
+  "repository": "https://github.com/danielkada/alfhen-api.git",
+  "author": "Daniel Kadã",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
