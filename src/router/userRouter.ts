@@ -3,9 +3,13 @@ import { Router } from 'express';
 export const userRouter = Router();
 
 userRouter.get('/users/:userId', (request, response) => {
-    return response.json({ message: 'Hello World!'});
+    return response.json({ message: 'create!'});
 });
 
-userRouter.post('/users', (request, response) => {
-    return response.json({ message: 'Hello World!'});
+userRouter.put('/users', (request, response) => {
+    return response.json({ message: 'update'});
+});
+
+userRouter.delete('/users', (request, response) => {
+    return response.json({ message: 'delete'});
 });
