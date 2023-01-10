@@ -1,11 +1,15 @@
 import { query } from '../../database';
 
-interface UserProps {
-  user_name: string;
-  password: string;
-}
+import { UserProps } from '../../types/UserProps';
 
 class UsersRepository {
+  async findAll() {
+    const rows: Array<[UserProps]> = await query(`
+      SELECT * FROM users
+    `);
+
+    return rows;
+  }
   async create({ user_name, password }: UserProps) {
     const [row] = await query(`
       INSERT INTO users(user_name, password)
