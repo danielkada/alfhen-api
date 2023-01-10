@@ -1,0 +1,18 @@
+CREATE DATABASE alfhen;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE IF NOT EXISTS users (
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  name VARCHAR NOT NULL,
+  surname VARCHAR NOT NULL,
+  user_name VARCHAR UNIQUE NOT NULL,
+  password VARCHAR NOT NULL,
+  created_at DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+CREATE TABLE IF NOT EXISTS books (
+  id UUID NOT NULL,
+  user_id UUID,
+  FOREIGN KEY(user_id) REFERENCES users(id)
+);
