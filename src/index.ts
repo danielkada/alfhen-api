@@ -1,15 +1,15 @@
-import 'reflect-metadata';
-
 import express from 'express';
+import { AppDataSource } from './data-source';
 
 import { router } from './router';
 
-const app = express();
+AppDataSource.initialize()
+  .then(() => {
+    const app = express();
 
-app.use(router);
+    app.use(router);
 
-const port = 3001;
-
-app.listen(3001, () => {
-  console.log(`🔥 Server started at http://localhost:${port}`);
-});
+    app.listen(process.env.PORT, () => {
+      console.log(`🔥 Server started at http://localhost:${process.env.PORT}`);
+    });
+  });
