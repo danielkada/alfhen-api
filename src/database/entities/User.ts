@@ -23,6 +23,6 @@ export class User {
   @CreateDateColumn({ type: 'timestamp', default: Date.now() })
     created_at: Date;
 
-  @OneToMany()
+  @OneToMany(() => Reading, reading => reading.user)
     readings: Reading[];
 }
