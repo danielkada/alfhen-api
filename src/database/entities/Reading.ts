@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-import { Book } from './Book';
 import { User } from './User';
 
 @Entity('readings')
