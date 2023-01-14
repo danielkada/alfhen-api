@@ -7,6 +7,7 @@ AppDataSource.initialize()
   .then(() => {
     const app = express();
 
+    app.use(express.json());
     app.use(router);
 
     app.listen(process.env.PORT, () => {

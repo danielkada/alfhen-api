@@ -5,14 +5,10 @@ export const userRouter = Router();
 
 userRouter.get('/users', UserController.index);
 
-userRouter.get('/users/:userId', (request, response) => {
-  return response.json({ message: 'create!'});
-});
+userRouter.post('/users', UserController.store);
 
-userRouter.put('/users', (request, response) => {
-  return response.json({ message: 'update'});
-});
+userRouter.get('/users/:id', UserController.show);
 
-userRouter.delete('/users', (request, response) => {
-  return response.json({ message: 'delete'});
-});
+userRouter.put('/users/:id', UserController.update);
+
+userRouter.delete('/users/:id', UserController.delete);

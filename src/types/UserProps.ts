@@ -1,4 +1,6 @@
 export interface UserProps {
-  user_name: string;
-  password: string;
+  name: string;
+  surname: string;
+  username: string;
+  hashedPassword: string;
 }

@@ -9,11 +9,25 @@ export class CreateReading1673566286025 implements MigrationInterface {
         columns: [
           {
             name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+          },
+          {
+            name: 'user_id',
             type: 'uuid'
           },
           {
+            name: 'book_id',
+            type: 'uuid',
+          },
+          {
             name: 'current_page',
-            type: 'timestamp'
+            type: 'int',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
           }
         ]
       })
