@@ -1,11 +1,9 @@
-import { v4 as uuid } from 'uuid';
-
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Reading } from './Reading';
 
 @Entity('users')
 export class User {
-  @PrimaryColumn({ type: 'uuid', unique: true, default: uuid() })
+  @PrimaryColumn({ type: 'uuid', unique: true })
     id: string;
 
   @Column({ type: 'text' })
@@ -20,7 +18,7 @@ export class User {
   @Column({ type: 'text' })
     password: string;
 
-  @CreateDateColumn({ type: 'timestamp', default: Date.now() })
+  @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 
   @OneToMany(() => Reading, reading => reading.user)

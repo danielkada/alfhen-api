@@ -53,7 +53,6 @@ class UserController {
       return response.status(400).json({ error: 'Password is required!'});
     }
 
-
     const nameWithoutSpaces = removeBlankSpaces(name);
     const surnameWithoutSpaces = removeBlankSpaces(surname);
     const usernameWithoutSpaces = removeBlankSpaces(username);
@@ -72,7 +71,7 @@ class UserController {
 
   async update(request: Request, response: Response) {
     const { name, surname, username } = request.body;
-    const { id } = request.params;
+    const { id } = request.user;
 
     if(!isValidUUID(id)) {
       return response.status(400).json({ error: 'Invalid user id' });
@@ -115,7 +114,7 @@ class UserController {
   }
 
   async delete(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id } = request.user;
 
     if(!isValidUUID(id)) {
       return response.status(400).json({ error: 'Invalid user id' });

@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import UserController from '../app/controllers/UserController';
+import ensureAuthenticate from '../app/middlewares/ensureAuthenticate';
 
 export const userRouter = Router();
 
-userRouter.get('/users', UserController.index);
-
 userRouter.post('/users', UserController.store);
 
-userRouter.get('/users/:id', UserController.show);
+userRouter.get('/users', ensureAuthenticate, UserController.index);
 
-userRouter.put('/users/:id', UserController.update);
+userRouter.get('/users/:id', ensureAuthenticate, UserController.show);
 
-userRouter.delete('/users/:id', UserController.delete);
+userRouter.put('/users', ensureAuthenticate, UserController.update);
+
+userRouter.delete('/users', ensureAuthenticate, UserController.delete);

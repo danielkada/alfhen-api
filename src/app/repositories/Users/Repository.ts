@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import { User } from '../../../database/entities/User';
 
 import { UserProps } from '../../../types/UserProps';
@@ -31,12 +30,10 @@ class UsersRepository {
     hashedPassword
   }: UserProps): Promise<User> {
     const createdUser = usersRepository.create({
-      id: uuid(),
       name: name,
       surname: surname,
       username: username,
       password: hashedPassword,
-      created_at: new Date().toISOString(),
     });
 
     await usersRepository.save(createdUser);
