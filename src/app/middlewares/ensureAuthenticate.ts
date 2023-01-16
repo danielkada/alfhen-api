@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import decode from 'jwt-decode';
 
-import UsersRepository from '../repositories/Users/Repository';
+import UsersRepository from '../repositories/Users';
 
 const secretKey = process.env.SECRET_KEY as string;
 

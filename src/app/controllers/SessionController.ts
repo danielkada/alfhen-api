@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import UsersRepository from '../repositories/Users/Repository';
+import UsersRepository from '../repositories/Users';
 
 import bcrypt from 'bcrypt';
 import AuthenticateService from '../service/AuthenticateService';

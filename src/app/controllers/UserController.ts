@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { removeBlankSpaces } from '../../utils/removeBlankSpaces';
 import { isValidUUID } from '../../utils/isValidUUID';
 
-import UsersRepository from '../repositories/Users/Repository';
+import UsersRepository from '../repositories/Users';
 
 class UserController {
   async index(request: Request, response: Response) {
@@ -120,8 +120,8 @@ class UserController {
       return response.status(400).json({ error: 'Invalid user id' });
     }
 
-    const findUserById = await UsersRepository.findById(id);
-    if (!findUserById) {
+    const user = await UsersRepository.findById(id);
+    if (!user) {
       return response.status(404).json({ error: 'User does not exists!' });
     }
 
@@ -132,4 +132,4 @@ class UserController {
   }
 }
 
-export = new UserController();
+export default new UserController();

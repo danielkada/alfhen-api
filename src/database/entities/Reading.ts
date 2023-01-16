@@ -7,7 +7,7 @@ export class Reading {
     id: string;
 
   @Column({ type: 'varchar', default: 0 })
-    current_page: string;
+    current_page: number;
 
   @Column({ type: 'uuid' })
     book_id: string;

@@ -1,5 +1,7 @@
 import { Router } from 'express';
+
 import UserController from '../app/controllers/UserController';
+
 import ensureAuthenticate from '../app/middlewares/ensureAuthenticate';
 
 export const userRouter = Router();
