@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { bookRouter } from './bookRouter';
 import { readingRouter } from './readingRouter';
 
 import { sessionRouter } from './sessionRouter';
@@ -9,3 +10,4 @@ export const router = Router();
 router.use(userRouter);
 router.use(sessionRouter);
 router.use(readingRouter);
+router.use(bookRouter);

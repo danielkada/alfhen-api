@@ -20,7 +20,7 @@ export class CreateReading1673566286025 implements MigrationInterface {
           },
           {
             name: 'book_id',
-            type: 'uuid',
+            type: 'varchar',
           },
           {
             name: 'current_page',

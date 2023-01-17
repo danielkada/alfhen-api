@@ -3,6 +3,7 @@ import { isValidUUID } from '../../utils/isValidUUID';
 
 import ReadingsRepository from '../repositories/Readings';
 import UsersRepository from '../repositories/Users';
+import BooksRepository from '../service/repositories/BooksRepository';
 
 class ReadingController {
   async index(request: Request, response: Response) {
@@ -49,13 +50,14 @@ class ReadingController {
       return response.status(400).json({ error: 'Invalid user id' });
     }
 
-    if (!isValidUUID(book_id)) {
-      return response.status(400).json({ error: 'Invalid book id' });
-    }
-
     const user = await UsersRepository.findById(id);
     if (!user) {
       return response.status(404).json({ error: 'User does not exists!' });
+    }
+
+    const book = await BooksRepository.findById(book_id);
+    if (!book) {
+      return response.status(404).json({ error: 'Book not found!' });
     }
 
     const reading = await ReadingsRepository.findByBookId({
@@ -92,7 +94,7 @@ class ReadingController {
       return response.status(404).json({ error: 'User does not exists!' });
     }
 
-    const reading = await ReadingsRepository.findById({ userId, bookId: id});
+    const reading = await ReadingsRepository.findById({ id, userId });
     if (!reading) {
       return response.status(404).json({ error: 'Reading does not exists!' });
     }

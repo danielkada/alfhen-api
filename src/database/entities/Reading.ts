@@ -9,7 +9,7 @@ export class Reading {
   @Column({ type: 'varchar', default: 0 })
     current_page: number;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: 'varchar' })
     book_id: string;
 
   @Column({ type: 'uuid' })
