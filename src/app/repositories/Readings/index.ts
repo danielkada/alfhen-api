@@ -20,8 +20,8 @@ interface FindReadingByBookIdProps {
 }
 
 class ReadingsRepository {
-  findAll(userId: string): Promise<Reading[]> {
-    const readings = readingsRepository.findBy({ user_id: userId });
+  async findAll(userId: string): Promise<Reading[]> {
+    const readings = await readingsRepository.findBy({ user_id: userId });
 
     return readings;
   }

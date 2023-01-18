@@ -1,9 +1,10 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+
 import { Reading } from './Reading';
 
 @Entity('users')
 export class User {
-  @PrimaryColumn({ type: 'uuid', unique: true })
+  @PrimaryColumn({ type: 'uuid' })
     id: string;
 
   @Column({ type: 'text' })
