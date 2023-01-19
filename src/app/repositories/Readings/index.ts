@@ -44,10 +44,11 @@ class ReadingsRepository {
     return reading;
   }
 
-  async create({ userId, bookId }: ReadingProps) {
+  async create({ userId, bookId, currentPage }: ReadingProps) {
     const createdReading = readingsRepository.create({
       user_id: userId,
       book_id: bookId,
+      current_page: currentPage,
     });
 
     await readingsRepository.save(createdReading);

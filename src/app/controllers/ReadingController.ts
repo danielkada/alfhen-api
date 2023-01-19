@@ -3,7 +3,8 @@ import { isValidUUID } from '../../utils/isValidUUID';
 
 import ReadingsRepository from '../repositories/Readings';
 import UsersRepository from '../repositories/Users';
-import BooksRepository from '../service/repositories/BooksRepository';
+import APIBookGoogle from '../service/repositories/APIBookGoogle';
+import BooksRepository from '../repositories/Books';
 
 class ReadingController {
   async index(request: Request, response: Response) {
@@ -44,7 +45,7 @@ class ReadingController {
 
   async store(request: Request, response: Response) {
     const { id } = request.user;
-    const { book_id } = request.body;
+    const { book_id, current_page } = request.body;
 
     if (!isValidUUID(id)) {
       return response.status(400).json({ error: 'Invalid user id' });
@@ -55,25 +56,43 @@ class ReadingController {
       return response.status(404).json({ error: 'User does not exists!' });
     }
 
+    //const reading = await ReadingsRepository.findByBookId({
+    //  bookId: book_id,
+    //  userId: id
+    //});
+    //if (reading) {
+    //  return response.status(400).json({ error: 'This book is already registered in your readings!' });
+    //}
+
     const book = await BooksRepository.findById(book_id);
     if (!book) {
-      return response.status(404).json({ error: 'Book not found!' });
-    }
+      const bookAPI = await APIBookGoogle.findById(book_id);
+      if (!bookAPI) {
+        return response.status(404).json({ error: 'Book not found!' });
+      }
 
-    const reading = await ReadingsRepository.findByBookId({
-      bookId: book_id,
-      userId: id
-    });
-    if (reading) {
-      return response.status(400).json({ error: 'This book is already registered in your readings!' });
+      if (current_page >  bookAPI.numberOfPages) {
+        return response.status(400).json({ error: 'The current page number cannot exceed the number of pages!' });
+      }
+
+      await BooksRepository.create({
+        id: bookAPI.id,
+        title: bookAPI.title,
+        authors: bookAPI.authors,
+        publishedDate: bookAPI.publishedDate,
+        description: bookAPI.description,
+        numberOfPages: bookAPI.numberOfPages,
+      });
     }
 
     const createdReading = await ReadingsRepository.create({
       userId: id,
       bookId: book_id,
+      currentPage: current_page || 0,
     });
 
     return response.status(201).json(createdReading);
+
   }
 
   async update(request: Request, response: Response) {

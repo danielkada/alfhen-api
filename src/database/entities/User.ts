@@ -4,22 +4,27 @@ import { Reading } from './Reading';
 
 @Entity('users')
 export class User {
-  @PrimaryColumn({ type: 'uuid' })
+  @PrimaryColumn({
+    type: 'uuid',
+    primary: true,
+    generated: 'uuid',
+    default: 'uuid_generate_v4()'
+  })
     id: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'varchar' })
     name: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'varchar' })
     surname: string;
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'varchar', unique: true })
     username: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'varchar' })
     password: string;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamp', default: 'now()' })
     created_at: Date;
 
   @OneToMany(() => Reading, reading => reading.user)

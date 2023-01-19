@@ -20,12 +20,12 @@ class SessionController {
     const user = await UsersRepository.findByUsername(username);
 
     if (!user) {
-      return response.status(400).json({ error: 'Username or password incorrect!' });
+      return response.status(400).json({ error: 'These credentials do not match an account in our system!' });
     }
 
     const isValidPassword = await bcrypt.compare(password, user?.password as string);
     if (!isValidPassword) {
-      return response.status(400).json({ error: 'Username or password incorrect!' });
+      return response.status(400).json({ error: 'These credentials do not match an account in our system!' });
     }
 
     const authenticateInfo = await AuthenticateService.execute({ user, expiresIn: '4h' });

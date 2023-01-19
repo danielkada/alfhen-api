@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import BooksRepository from '../repositories/BooksRepository';
+import BooksRepository from '../repositories/APIBookGoogle';
 
 class BookController {
   async findById(request: Request, response: Response) {

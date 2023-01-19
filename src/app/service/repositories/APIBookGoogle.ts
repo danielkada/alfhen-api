@@ -1,16 +1,9 @@
 import axios from 'axios';
 
-interface MakeResponseBook {
-  id: string;
-  title: string;
-  authors: Array<string>;
-  publishedDate: string;
-  description: string;
-  numberOfPages: number;
-}
+import { BookProps } from '../../../types/BookProps';
 
-class BooksRepository {
-  async findById(id: string): Promise<MakeResponseBook | null> {
+class APIBookGoogle {
+  async findById(id: string): Promise<BookProps | null> {
     try {
       const { data } = await axios.get(`
       https://www.googleapis.com/books/v1/volumes/${id}?key=${process.env.API_KEY}
@@ -32,4 +25,4 @@ class BooksRepository {
   }
 }
 
-export default new BooksRepository();
+export default new APIBookGoogle();

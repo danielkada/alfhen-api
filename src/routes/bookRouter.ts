@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import BookController from '../app/service/controllers/BookController';
+import BookController from '../app/service/controllers/APIBookGoogle';
 
 export const bookRouter = Router();
 

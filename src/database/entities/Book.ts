@@ -4,7 +4,10 @@ import { Reading } from './Reading';
 
 @Entity('books')
 export class Book {
-  @PrimaryColumn({ type: 'uuid' })
+  @PrimaryColumn({
+    type: 'varchar',
+    primary: true,
+  })
     id: string;
 
   @Column({ type: 'varchar' })

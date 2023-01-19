@@ -12,7 +12,7 @@ class UsersRepository {
   }
 
   findById(id: string): Promise<User | null> {
-    const user = usersRepository.findOneBy({ id: id });
+    const user = usersRepository.findOneBy({ id });
 
     return user;
   }
