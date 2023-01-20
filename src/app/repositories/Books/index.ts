@@ -1,4 +1,4 @@
-import { BookCreateProps } from '../../../types/BookProps';
+import { BookCreateProps } from '../../../types/Book';
 
 import { booksRepository } from './Repository';
 

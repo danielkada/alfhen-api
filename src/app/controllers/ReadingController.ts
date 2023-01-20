@@ -109,6 +109,10 @@ class ReadingController {
       return response.status(400).json({ error: 'Invalid user id' });
     }
 
+    if (!current_page) {
+      return response.status(400).json({ error: 'Current page is required!' });
+    }
+
     const user = await UsersRepository.findById(userId);
     if (!user) {
       return response.status(404).json({ error: 'User does not exists!' });
@@ -119,8 +123,11 @@ class ReadingController {
       return response.status(404).json({ error: 'Reading does not exists!' });
     }
 
-    if (!current_page) {
-      return response.status(400).json({ error: 'Current page is required!' });
+    const book = await BooksRepository.findById(reading.book_id);
+    if (book) {
+      if (current_page > book.numberOfPages) {
+        return response.status(400).json({ error: 'The current page number cannot exceed the number of pages!' });
+      }
     }
 
     await ReadingsRepository.update(id, {

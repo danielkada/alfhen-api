@@ -12,7 +12,7 @@ export class Reading {
   })
     id: string;
 
-  @Column({ type: 'varchar', default: 0 })
+  @Column({ type: 'int', default: 0 })
     current_page: number;
 
   @Column({ type: 'varchar' })
@@ -25,7 +25,6 @@ export class Reading {
     created_at: Date;
 
   @ManyToOne(() => User, user => user.id, {
-    eager: true,
     cascade: true,
   })
   @JoinColumn({ name: 'user_id' })
