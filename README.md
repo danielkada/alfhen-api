@@ -55,4 +55,4 @@ Feito durante meus estudos!
 Entre em contato comigo.
 
 <a href="https://www.linkedin.com/in/kadadniel/">Linkedin</a>
-<a href="https://www.instagram.com/jvm_programador/">Instagran</a>
+<a href="https://www.instagram.com/jvm_programador/">Instagram</a>
