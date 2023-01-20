@@ -1,4 +1,5 @@
-import { BookProps } from '../../../types/BookProps';
+import { BookCreateProps } from '../../../types/BookProps';
+
 import { booksRepository } from './Repository';
 
 class BooksRepository {
@@ -11,18 +12,22 @@ class BooksRepository {
   async create({
     id,
     title,
+    subtitle,
     authors,
     publishedDate,
     description,
     numberOfPages,
-  }: BookProps) {
+    imageURL,
+  }: BookCreateProps) {
     const createdBook = booksRepository.create({
       id,
       title,
+      subtitle,
       authors,
       publishedDate,
       description,
       numberOfPages,
+      imageURL,
     });
 
     await booksRepository.save(createdBook);

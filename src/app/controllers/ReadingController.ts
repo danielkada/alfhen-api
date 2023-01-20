@@ -78,10 +78,12 @@ class ReadingController {
       await BooksRepository.create({
         id: bookAPI.id,
         title: bookAPI.title,
+        subtitle: bookAPI.subtitle || null,
         authors: bookAPI.authors,
-        publishedDate: bookAPI.publishedDate,
+        publishedDate: bookAPI.publishedDate || null,
         description: bookAPI.description,
         numberOfPages: bookAPI.numberOfPages,
+        imageURL: bookAPI.imageURL || null,
       });
     }
 

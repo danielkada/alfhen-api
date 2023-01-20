@@ -1,56 +1,32 @@
+import { BookAPIFindByIDResponse, BookAPIFindByTitleResponse, BookLocalFindByIDResponse, BookLocalFindByTitleResponse } from '../../../types/Book';
 import APIBookGoogle from './Repository';
 
-interface FindByIdResponse {
-  items: [
-    {
-      id: string;
-      volumeInfo: {
-        title: string;
-        subtitle: string | null;
-        authors: string;
-        publishedDate: string | null;
-        description: string;
-        pageCount: number;
-        imageLinks: {
-          thumbnail: string;
-          smallThumbnail: string;
-        };
-      }
-    }
-  ]
-}
-
-interface FindByTitleResponse {
-  totalItems: number;
-  items: Array<FindByIdResponse>
-}
-
-interface MakeResponseSearchId {
+export interface BookInLoop {
   id: string;
-  title: string;
-  subtitle: string | null;
-  authors: string;
-  publishedDate: string | null;
-  description: string;
-  numberOfPages: number;
-  imageURL: string | null;
-}
-
-interface MakeResponseSearchTitle {
-  totalItems: number;
-  items: Array<MakeResponseSearchId>
+  volumeInfo: {
+    title: string;
+    subtitle: string | null;
+    authors: string;
+    publishedDate: string | null;
+    description: string;
+    pageCount: number;
+    imageLinks: {
+      thumbnail: string;
+      smallThumbnail: string;
+    };
+  }
 }
 
 class BooksAPIRepository {
-  async findById(id: string): Promise<MakeResponseSearchId | null> {
+  async findById(id: string): Promise<BookLocalFindByIDResponse | null> {
     try {
-      const response: Promise<FindByIdResponse> = APIBookGoogle.find({
+      const response: Promise<BookAPIFindByIDResponse> = APIBookGoogle.find({
         path: `?q=${id}&key=${process.env.API_KEY}`
       });
 
       const [volume] = (await response).items;
 
-      const makeResponse: MakeResponseSearchId = {
+      const makeResponse: BookLocalFindByIDResponse = {
         id: volume.id,
         title: volume.volumeInfo.title,
         subtitle: volume.volumeInfo.subtitle || null,
@@ -69,15 +45,15 @@ class BooksAPIRepository {
     }
   }
 
-  async findByTitle(title: string): Promise<MakeResponseSearchTitle | null> {
+  async findByTitle(title: string): Promise<BookLocalFindByTitleResponse | null> {
     try {
-      const response: Promise<FindByTitleResponse> = await APIBookGoogle.find({
+      const response: Promise<BookAPIFindByTitleResponse> = await APIBookGoogle.find({
         path: `?q=intitle:${title}&key=${process.env.API_KEY}`
       });
 
       const volumes = (await response);
 
-      const items: Array<MakeResponseSearchId> = [];
+      const items: Array<BookLocalFindByIDResponse> = [];
 
       volumes.items.forEach((item: any) => {
         items.push({
@@ -94,7 +70,7 @@ class BooksAPIRepository {
         });
       });
 
-      const makeResponse: MakeResponseSearchTitle = {
+      const makeResponse: BookLocalFindByTitleResponse = {
         totalItems: volumes.totalItems,
         items: items,
 
