@@ -1,6 +1,8 @@
 import { Router } from 'express';
-import BookController from '../app/service/controllers/APIBookGoogle';
+
+import BooksAPIController from '../service/controllers/BooksAPIController';
 
 export const bookRouter = Router();
 
-bookRouter.get('/books/id/:id', BookController.findById);
+bookRouter.get('/books/id/:id', BooksAPIController.findById);
+bookRouter.get('/books/name/:title', BooksAPIController.findByName);

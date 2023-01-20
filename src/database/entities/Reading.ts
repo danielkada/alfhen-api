@@ -24,11 +24,15 @@ export class Reading {
   @CreateDateColumn({ type: 'timestamp', default: 'now()' })
     created_at: Date;
 
-  @ManyToOne(() => User, user => user.id)
+  @ManyToOne(() => User, user => user.id, {
+    eager: true,
+  })
   @JoinColumn({ name: 'user_id' })
     user: User;
 
-  @ManyToOne(() => Book, book => book.id)
+  @ManyToOne(() => Book, book => book.id, {
+    eager: true,
+  })
   @JoinColumn({ name: 'book_id' })
     book: Book;
 }

@@ -3,7 +3,7 @@ import { isValidUUID } from '../../utils/isValidUUID';
 
 import ReadingsRepository from '../repositories/Readings';
 import UsersRepository from '../repositories/Users';
-import APIBookGoogle from '../service/repositories/APIBookGoogle';
+import APIBookGoogle from '../../service/repositories/BooksAPI';
 import BooksRepository from '../repositories/Books';
 
 class ReadingController {
@@ -56,13 +56,13 @@ class ReadingController {
       return response.status(404).json({ error: 'User does not exists!' });
     }
 
-    //const reading = await ReadingsRepository.findByBookId({
-    //  bookId: book_id,
-    //  userId: id
-    //});
-    //if (reading) {
-    //  return response.status(400).json({ error: 'This book is already registered in your readings!' });
-    //}
+    const reading = await ReadingsRepository.findByBookId({
+      bookId: book_id,
+      userId: id
+    });
+    if (reading) {
+      return response.status(400).json({ error: 'This book is already registered in your readings!' });
+    }
 
     const book = await BooksRepository.findById(book_id);
     if (!book) {
@@ -92,7 +92,6 @@ class ReadingController {
     });
 
     return response.status(201).json(createdReading);
-
   }
 
   async update(request: Request, response: Response) {
