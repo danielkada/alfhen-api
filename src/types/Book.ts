@@ -10,23 +10,19 @@ export interface BookCreateProps {
 }
 
 export interface BookAPIFindByIDResponse {
-  items: [
-    {
-      id: string;
-      volumeInfo: {
-        title: string;
-        subtitle: string | null;
-        authors: string;
-        publishedDate: string | null;
-        description: string;
-        pageCount: number;
-        imageLinks: {
-          thumbnail: string;
-          smallThumbnail: string;
-        };
-      }
-    }
-  ]
+  id: string;
+  volumeInfo: {
+    title: string;
+    subtitle: string | null;
+    authors: string;
+    publishedDate: string | null;
+    description: string;
+    pageCount: number;
+    imageLinks: {
+      thumbnail: string;
+      smallThumbnail: string;
+    };
+  }
 }
 
 export interface BookAPIFindByIDResponse {
