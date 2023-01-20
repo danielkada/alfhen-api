@@ -10,7 +10,7 @@ interface FindByIdResponse {
         authors: string;
         publishedDate: string | null;
         description: string;
-        pageCount: string;
+        pageCount: number;
         imageLinks: {
           thumbnail: string;
           smallThumbnail: string;
@@ -32,7 +32,7 @@ interface MakeResponseSearchId {
   authors: string;
   publishedDate: string | null;
   description: string;
-  numberOfPages: string;
+  numberOfPages: number;
   imageURL: string | null;
 }
 

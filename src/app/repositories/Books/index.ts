@@ -14,7 +14,7 @@ class BooksRepository {
     authors,
     publishedDate,
     description,
-    numberOfPages
+    numberOfPages,
   }: BookProps) {
     const createdBook = booksRepository.create({
       id,

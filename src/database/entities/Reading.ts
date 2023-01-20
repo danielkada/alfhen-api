@@ -26,6 +26,7 @@ export class Reading {
 
   @ManyToOne(() => User, user => user.id, {
     eager: true,
+    cascade: true,
   })
   @JoinColumn({ name: 'user_id' })
     user: User;
