@@ -1,5 +1,8 @@
 import express from 'express';
+
 import { AppDataSource } from './database/data-source';
+
+import swaggerUi from 'swagger-ui-express';
 
 import { router } from './routes';
 
@@ -8,6 +11,9 @@ AppDataSource.initialize()
     const app = express();
 
     app.use(express.json());
+
+    app.use('/documentation', swaggerUi.serve, swaggerUi.setup());
+
     app.use(router);
 
     app.listen(process.env.PORT, () => {
