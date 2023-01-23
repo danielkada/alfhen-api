@@ -17,6 +17,8 @@ class SessionController {
       return response.status(400).json({ error: 'Password is required!'});
     }
 
+    console.log(username);
+
     const user = await UsersRepository.findByUsername(username);
 
     if (!user) {

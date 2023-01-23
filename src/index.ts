@@ -2,8 +2,7 @@ import express from 'express';
 
 import { AppDataSource } from './database/data-source';
 
-import swaggerUi from 'swagger-ui-express';
-
+import { cors } from './app/middlewares/cors';
 import { router } from './routes';
 
 AppDataSource.initialize()
@@ -12,8 +11,7 @@ AppDataSource.initialize()
 
     app.use(express.json());
 
-    app.use('/documentation', swaggerUi.serve, swaggerUi.setup());
-
+    app.use(cors);
     app.use(router);
 
     app.listen(process.env.PORT, () => {
